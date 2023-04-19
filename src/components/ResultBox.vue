@@ -7,6 +7,7 @@
 
     <!-- mixture effect -->
     <flask-item
+      :size="15"
       style="margin: 3rem auto"
       :color="mixtureEffectFill" />
 
