@@ -11,7 +11,7 @@
       style="margin: 3rem auto"
       :color="mixtureEffectFill"
       :buttonsVisible="false"
-      amount="100" />
+      :amount="100" />
 
     <!-- refresh btn -->
     <buttom-item
@@ -21,14 +21,39 @@
       :font-size="1.5"
       icon="sync" />
 
+      <buttom-item
+      @click="modalVisible = true"
+        :size="4"
+        :movement="0.5"
+        :font-size="1.5"
+        icon="question"/>
+        <ModelItem
+        v-if="modalVisible"
+        @cancel="modalVisible = false"
+        ></ModelItem>
+        <ModalItem v-if="modalVisible" @cancel="modalVisible = false">
+        <template v-slot:header> About the app </template>
+
+        <template v-slot:body>
+          Mix three colors to create the perfect one!
+        </template>
+
+        <template v-slot:footer>
+
+        </template>
+      </ModalItem>
   </div>
+
 </template>
 
 <script>
 import FlaskItem from './shared/FlaskItem.vue'
 import ButtomItem from './shared/ButtomItem.vue'
+import ModalItem from './ModalItem.vue'
+
 export default {
-  name: 'FlashItem',
+  data: () => ({ modalVisible: false }),
+  name: 'ResultsBox',
   props: {
     mixtures: {
       type: Array,
@@ -43,7 +68,8 @@ export default {
   },
   components: {
     FlaskItem,
-    ButtomItem
+    ButtomItem,
+    ModalItem
   }
 }
 </script>
