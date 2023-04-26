@@ -1,12 +1,16 @@
 <template>
-  <div class="flask fadeIn" :style="flaskStyle">
+  
+  <div ref="twoja" class="flask fadeIn" :style="flaskStyle">
 
     <!-- decrement btn -->
     <buttom-item
       v-if="buttonsVisible"
       class="flask__btn flask__btn--left"
       icon="arrow-down"
-      @click="$emit('decrement')" />
+      @click="
+        twojaMethod();
+        $emit('decrement');
+      " />
 
     <div
       :class="fillClasses"
@@ -18,7 +22,10 @@
       class="flask__btn flask__btn--right"
       icon="arrow-up"
       :movement="-0.5"
-      @click="$emit('increment')" />
+      @click="
+        twojaMethod();
+        $emit('increment')
+      " />
   </div>
 
 </template>
@@ -49,6 +56,12 @@ export default {
   },
   components: {
     ButtomItem
+  },
+  methods: {
+		twojaMethod () {
+      this.$refs.twoja.classList.add("zoomIn");
+			setTimeout (setTimeout(() => { this.$refs.twoja.classList.remove("zoomIn") }, 300));
+		},
   },
   computed: {
     flaskStyle () {

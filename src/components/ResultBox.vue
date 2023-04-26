@@ -7,11 +7,14 @@
 
     <!-- mixture effect -->
     <flask-item
-      :size="15"
+      :size="10"
       style="margin: 3rem auto"
       :color="mixtureEffectFill"
       :buttonsVisible="false"
       :amount="100" />
+
+      <!--rgb x x x -->
+      <p v-text="mixtureEffectFill"></p>
 
     <!-- refresh btn -->
     <buttom-item
@@ -27,10 +30,11 @@
         :movement="0.5"
         :font-size="1.5"
         icon="question"/>
-        <model-item
+      
+      <model-item
         v-if="modalVisible"
-        @cancel="modalVisible = false"
-        ></model-item>
+        @cancel="modalVisible = false"/>
+
         <modal-item v-if="modalVisible" @cancel="modalVisible = false">
         <template v-slot:header> About the app </template>
         <template v-slot:body>
@@ -39,11 +43,21 @@
         <template v-slot:footer>
         </template>
       </modal-item>
-      <buttom-item
-        :size="4"
-        :movement="0.5"
-        :font-size="1.5"
-        icon="share-alt"/>
+      <RouterLink :to="createLink">
+        <buttom-item
+          :size="4"
+          :movement="0.5"
+          :font-size="1.5"
+          icon="share-alt"/>
+      </RouterLink>
+      <!-- help modal --->
+<transition name="slide-fade">
+  <modal-item
+    v-if="modalVisible"
+    @cancel="hideModal">
+    ...
+  </modal-item>
+</transition>
   </div>
 
 </template>
@@ -73,7 +87,6 @@ export default {
       const [redCol, greenCol, blueCol] = this.mixtures.map((item) =>
         Math.floor(item.amount * 2.5)
       )
-      console.log(`color/${redCol}/${greenCol}/${blueCol}`)
       return `color/${redCol}/${greenCol}/${blueCol}`
     }
   },
@@ -104,5 +117,16 @@ export default {
   &:hover {
     margin-top: -0.5rem;
   }
+}
+.slide-fade-enter-active {
+  transition: opacity .3s;
+}
+
+.slide-fade-enter-from {
+  opacity: 0;
+}
+
+.slide-fade-enter-to {
+  opacity: 1;
 }
 </style>

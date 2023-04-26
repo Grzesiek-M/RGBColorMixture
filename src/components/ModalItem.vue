@@ -27,12 +27,11 @@
 
 <script>
 
-import ButtonItem from './shared/ButtomItem.vue'
 
 export default {
   name: 'ModalItem',
   components: {
-    ButtonItem
+    
   }
 }
 
